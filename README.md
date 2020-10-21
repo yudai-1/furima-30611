@@ -24,7 +24,7 @@
 
 | Column           | Type         | Options                        |
 |------------------|--------------|--------------------------------|
-| seller           | string       | null: false, foreign_key: true |
+| users            | references   | null: false, foreign_key: true |
 | name             | string       | null: false                    |
 | price            | integer      | null: false                    |
 | category_id      | integer      | null: false                    |
@@ -32,6 +32,7 @@
 | postage_id       | integer      | null: false                    |
 | region_id        | integer      | null: false                    |
 | shipping_date_id | integer      | null: false                    |
+| description      | text         | null: false                    |
 
 ### Association
 
@@ -44,7 +45,7 @@
 | Column           | Type         | Options                        |
 |------------------|--------------|--------------------------------|
 | item             | references   | null: false, foreign_key: true |
-| buyer            | references   | null: false, foreign_key: true |
+| users            | references   | null: false, foreign_key: true |
 
 ### Association
 
@@ -63,7 +64,7 @@
 | block_number     | string       | null: false                    |
 | building_name    | string       |                                |
 | phone_number     | string       | null: false                    |
-| user             | references   | null: false, foreign_key: true |
+| purchases        | references   | null: false, foreign_key: true |
 
 ### Association
 
