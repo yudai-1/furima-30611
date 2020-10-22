@@ -24,7 +24,7 @@
 
 | Column           | Type         | Options                        |
 |------------------|--------------|--------------------------------|
-| users            | references   | null: false, foreign_key: true |
+| user             | references   | null: false, foreign_key: true |
 | name             | string       | null: false                    |
 | price            | integer      | null: false                    |
 | category_id      | integer      | null: false                    |
@@ -45,7 +45,7 @@
 | Column           | Type         | Options                        |
 |------------------|--------------|--------------------------------|
 | item             | references   | null: false, foreign_key: true |
-| users            | references   | null: false, foreign_key: true |
+| user             | references   | null: false, foreign_key: true |
 
 ### Association
 
