@@ -82,6 +82,42 @@ RSpec.describe User, type: :model do
       @user.birth_day = nil
       @user.valid?
       expect(@user.errors.full_messages).to include("Birth day can't be blank")
+    end
+    
+    it "passwordが数字だけでは登録できないこと" do
+      @user.password = "123456"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end    
-  end
+
+    it "passwordが英字だけでは登録できないこと" do
+      @user.password = "aaaaaa"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    end
+    
+    it "family_nameが全角漢字、ひらがな、カタカナでなければ登録できないこと" do
+      @user.family_name =  "ｱｲｳｴｵaＢ"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name 全角漢字、ひらがな、カタカナを使用してください")
+    end
+
+    it "first_nameが全角漢字、ひらがな、カタカナでなければ登録できないこと" do
+      @user.first_name =  "ｱｲｳｴｵaＢ"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name 全角漢字、ひらがな、カタカナを使用してください")
+    end
+    
+    it "family_name_kanaが全角カタカナでなければ登録できないこと" do
+      @user.family_name_kana =  "ｱｲｳｴｵaＢあ阿"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name kana 全角カタカナを使用してください")
+    end
+
+    it "first_name_kanaが全角カタカナでなければ登録できないこと" do
+      @user.first_name_kana =  "ｱｲｳｴｵaＢあ阿"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana 全角カタカナを使用してください")
+    end    
+  end  
 end
