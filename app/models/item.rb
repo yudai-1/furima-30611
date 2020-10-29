@@ -1,4 +1,7 @@
 class Item < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions  
+
+
   belongs_to :user
   has_one    :purchase
   has_one_attached :image
@@ -12,7 +15,7 @@ class Item < ApplicationRecord
     validates :region_id
     validates :shipping_date_id
     validates :description
-    validates :image　
+    validates :image
   end
 
 end
