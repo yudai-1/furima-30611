@@ -2,12 +2,12 @@ FactoryBot.define do
   factory :item do
     name               {"hoge"}
     price              {"9999"}
-    category_id        {1}
-    condition_id       {1}
-    postage_id         {1}
-    region_id          {1}
-    shipping_date_id   {1}
-    description        {1}
+    category_id        {2}
+    condition_id       {2}
+    postage_id         {2}
+    region_id          {2}
+    shipping_date_id   {2}
+    description        {2}
 
     association :user
 

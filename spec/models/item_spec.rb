@@ -86,6 +86,36 @@ RSpec.describe Item, type: :model do
       @item.price = "３００"
       @item.valid?
       expect(@item.errors.full_messages).to include("Price is not a number")
+    end
+    
+    it "category_idが{ other_than: 1 }では登録できないこと" do
+      @item.category_id = "{ other_than: 1 }"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Category is not a number")
+    end
+    
+    it "condition_idが{ other_than: 1 }では登録できないこと" do
+      @item.condition_id = "{ other_than: 1 }"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Condition is not a number")
+    end    
+
+    it "postage_idが{ other_than: 1 }では登録できないこと" do
+      @item.postage_id = "{ other_than: 1 }"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Postage is not a number")
+    end    
+
+    it "region_idが{ other_than: 0 }では登録できないこと" do
+      @item.region_id = "{ other_than: 0 }"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Region is not a number")
+    end
+    
+    it "shipping_date_idが{ other_than: 0 }では登録できないこと" do
+      @item.shipping_date_id = "{ other_than: 0 }"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Shipping date is not a number")
     end    
   end
 
