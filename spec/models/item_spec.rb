@@ -71,13 +71,13 @@ RSpec.describe Item, type: :model do
     end
     
     it "priceが299では登録できないこと" do
-      @item.price = "299"
+      @item.price = 299
       @item.valid?
       expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
     end
     
     it "priceが10000000では登録できないこと" do
-      @item.price = "10000000"
+      @item.price = 10000000
       @item.valid?
       expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
     end  
@@ -89,33 +89,33 @@ RSpec.describe Item, type: :model do
     end
     
     it "category_idが{ other_than: 1 }では登録できないこと" do
-      @item.category_id = "{ other_than: 1 }"
+      @item.category_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Category is not a number")
+      expect(@item.errors.full_messages).to include("Category must be other than 1")
     end
     
     it "condition_idが{ other_than: 1 }では登録できないこと" do
-      @item.condition_id = "{ other_than: 1 }"
+      @item.condition_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Condition is not a number")
+      expect(@item.errors.full_messages).to include("Condition must be other than 1")
     end    
 
     it "postage_idが{ other_than: 1 }では登録できないこと" do
-      @item.postage_id = "{ other_than: 1 }"
+      @item.postage_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Postage is not a number")
+      expect(@item.errors.full_messages).to include("Postage must be other than 1")
     end    
 
     it "region_idが{ other_than: 0 }では登録できないこと" do
-      @item.region_id = "{ other_than: 0 }"
+      @item.region_id = 0
       @item.valid?
-      expect(@item.errors.full_messages).to include("Region is not a number")
+      expect(@item.errors.full_messages).to include("Region must be other than 0")
     end
     
     it "shipping_date_idが{ other_than: 0 }では登録できないこと" do
-      @item.shipping_date_id = "{ other_than: 0 }"
+      @item.shipping_date_id = 0
       @item.valid?
-      expect(@item.errors.full_messages).to include("Shipping date is not a number")
+      expect(@item.errors.full_messages).to include("Shipping date must be other than 0")
     end    
   end
 
