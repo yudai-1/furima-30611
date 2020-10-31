@@ -5,6 +5,12 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one    :purchase
   has_one_attached :image
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :postage
+  belongs_to :region
+  belongs_to :shipping_date
+
 
   with_options presence: true do
     validates :name
