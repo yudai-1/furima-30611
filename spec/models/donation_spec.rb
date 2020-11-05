@@ -24,6 +24,12 @@ RSpec.describe Donation, type: :model do
     end
 
     it 'prefecture_idを選択していないと保存できないこと' do
+      @donation.prefecture_id = nil
+      @donation.valid?
+      expect(@donation.errors.full_messages).to include("Prefecture can't be blank")
+    end
+
+    it 'prefecture_idが0だと保存できないこと' do
       @donation.prefecture_id = 0
       @donation.valid?
       expect(@donation.errors.full_messages).to include("Prefecture can't be blank")
@@ -46,11 +52,33 @@ RSpec.describe Donation, type: :model do
       expect(@donation).to be_valid
     end
 
-    it 'phone_numberは11桁以内でないと保存できないこと' do
-      @donation.phone_number = "09012345678"
-      @donation.valid?
-      expect(@donation.errors.full_messages).to include()
+    it 'phone_numberは10桁は保存できること' do
+      @donation.phone_number = "0901234567"
+      expect(@donation).to be_valid
     end
+
+    it 'phone_numberは11桁は保存できること' do
+      @donation.phone_number = "09012345678"
+      expect(@donation).to be_valid
+    end    
+
+    it 'phone_numberは9桁では保存できないこと' do
+      @donation.phone_number = "090123456"
+      @donation.valid?
+      expect(@donation.errors.full_messages).to include("Phone number is invalid")
+    end
+
+    it 'phone_numberは12桁では保存できないこと' do
+      @donation.phone_number = "090123456789"
+      @donation.valid?
+      expect(@donation.errors.full_messages).to include("Phone number is invalid")
+    end    
+
+    it 'phone_numberが数字以外では保存できないこと' do
+      @donation.phone_number = "電話"
+      @donation.valid?
+      expect(@donation.errors.full_messages).to include("Phone number is invalid")
+    end    
 
     it "tokenがあれば保存ができること" do
       expect(@donation).to be_valid

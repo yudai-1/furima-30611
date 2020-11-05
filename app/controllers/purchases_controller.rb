@@ -1,9 +1,9 @@
 class PurchasesController < ApplicationController
   before_action :move_to_signed_in, expect: [:index]
+  before_action :set_purchase, only: [:index, :create]
 
   def index
     @donation = Donation.new
-    @item = Item.find(params[:item_id])
     if current_user == @item.user
       redirect_to root_path
     end
@@ -11,7 +11,6 @@ class PurchasesController < ApplicationController
 
   def create
     @donation = Donation.new(purchase_params)
-    @item = Item.find(params[:item_id])
     if @donation.valid?
       pay_item
       @donation.save
@@ -21,6 +20,10 @@ class PurchasesController < ApplicationController
     end
   end
 
+  def set_purchase
+    @item = Item.find(params[:item_id])
+  end
+
   private
 
   def purchase_params
@@ -28,7 +31,7 @@ class PurchasesController < ApplicationController
   end  
 
   def pay_item
-    Payjp.api_key = "sk_test_2a2401fc1547ada97073f251"
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
       amount: @item.price,  
       card: purchase_params[:token],    
