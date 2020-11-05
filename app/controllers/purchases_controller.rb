@@ -6,7 +6,10 @@ class PurchasesController < ApplicationController
     @donation = Donation.new
     if current_user == @item.user
       redirect_to root_path
+    elsif @item.purchase
+      redirect_to root_path
     end
+      
   end
 
   def create
